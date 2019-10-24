@@ -131,6 +131,23 @@ export const asyncRouterMap = [
         ]
       },
 
+      // apidoc
+      {
+        path: '/apidoc',
+        name: 'apidoc',
+        component: PageView,
+        redirect: '/apidoc/document-center',
+        meta: { title: '接口文档', icon: 'table', permission: [ 'table' ] },
+        children: [
+          {
+            path: '/apidoc/document-center',
+            name: 'DocumentCenter',
+            component: () => import('@/views/apidoc/DocumentCenter'),
+            meta: { title: '文档中心', keepAlive: true, permission: [ 'table' ] }
+          }
+        ]
+      },
+
       // profile
       {
         path: '/profile',

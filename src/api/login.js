@@ -38,6 +38,14 @@ export function getInfo () {
   })
 }
 
+export function getInfo2 (parameter) {
+  return axios({
+    url: '/user/info',
+    method: 'get',
+    data: parameter
+  })
+}
+
 export function getCurrentUserNav (token) {
   return axios({
     url: '/user/nav',
