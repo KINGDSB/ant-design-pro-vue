@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { login, getInfo, logout } from '@/api/login'
+import { login, getInfo, getInfo2, logout } from '@/api/login'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import { welcome } from '@/utils/util'
 
@@ -50,11 +50,16 @@ const user = {
     // 获取用户信息
     GetInfo ({ commit }) {
       return new Promise((resolve, reject) => {
-        getInfo().then(response => {
-          const result = response.result
+        getInfo2().then(response => {
+        // getInfo().then(response => {
+          console.log('############ getInfo ############')
+          console.log(response)
+          const result = response
 
           if (result.role && result.role.permissions.length > 0) {
+            console.log('result.role && result.role.permissions.length > 0')
             const role = result.role
+            console.log('role')
             role.permissions = result.role.permissions
             role.permissions.map(per => {
               if (per.actionEntitySet != null && per.actionEntitySet.length > 0) {
@@ -63,9 +68,12 @@ const user = {
               }
             })
             role.permissionList = role.permissions.map(permission => { return permission.permissionId })
+            console.log('role.permissionList')
+            console.log(role.permissionList)
             commit('SET_ROLES', result.role)
             commit('SET_INFO', result)
           } else {
+            console.log('else {')
             reject(new Error('getInfo: roles must be a non-null array !'))
           }
 
@@ -73,6 +81,7 @@ const user = {
           commit('SET_AVATAR', result.avatar)
 
           resolve(response)
+          console.log('############ resolve(response) ############')
         }).catch(error => {
           reject(error)
         })
