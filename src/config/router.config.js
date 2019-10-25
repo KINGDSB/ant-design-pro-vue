@@ -9,8 +9,9 @@ export const asyncRouterMap = [
     name: 'index',
     component: BasicLayout,
     meta: { title: '首页' },
-    redirect: '/dashboard/workplace',
+    redirect: '/workplace',
     children: [
+      /*
       // dashboard
       {
         path: '/dashboard',
@@ -45,6 +46,7 @@ export const asyncRouterMap = [
           }
         ]
       },
+      */
 
       // forms
       {
@@ -135,17 +137,16 @@ export const asyncRouterMap = [
       {
         path: '/apidoc',
         name: 'apidoc',
-        component: PageView,
-        redirect: '/apidoc/document-center',
-        meta: { title: '接口文档', icon: 'file-word', permission: [ 'table' ] },
-        children: [
-          {
-            path: '/apidoc/document-center',
-            name: 'DocumentCenter',
-            component: () => import('@/views/apidoc/DocumentCenter'),
-            meta: { title: '文档中心', keepAlive: true, permission: [ 'table' ] }
-          }
-        ]
+        component: () => import('@/views/apidoc/DocumentCenter'),
+        meta: { title: '文档中心', icon: 'file-word', permission: [ 'table' ] }
+      },
+
+      // 个人中心
+      {
+        path: '/workplace',
+        name: 'Workplace',
+        component: () => import('@/views/dashboard/Workplace'),
+        meta: { title: '个人中心', keepAlive: true, icon: bxAnaalyse, permission: [ 'dashboard' ] }
       },
 
       // profile
