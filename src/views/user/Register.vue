@@ -101,7 +101,7 @@
 <script>
 import { mixinDevice } from '@/utils/mixin.js'
 import { getSmsCaptcha } from '@/api/login'
-
+import {register} from '@/api/register'
 const levelNames = {
   0: '低',
   1: '低',
@@ -212,10 +212,35 @@ export default {
 
     handleSubmit () {
       const { form: { validateFields }, state, $router } = this
+      console.log('handleSubmit')
       validateFields({ force: true }, (err, values) => {
+        console.log('validateFields111')
         if (!err) {
           state.passwordLevelChecked = false
-          $router.push({ name: 'registerResult', params: { ...values } })
+
+          console.log(values)
+
+        //  xxxxApi({ 'str': 'userIdheiheihei' }).then(response => {
+        //     console.log(response)
+        //   }).catch(error => {
+        //     console.log(error)
+        //   })
+        values['userName'] = values.email
+        console.log(values)
+        register(values).then(respose =>{
+          console.log(respose)
+          if(respose.code==200){
+            alert("注册成功，即将跳转登陆页面")
+          //  $router.push({ name: 'registerResult', params: { ...values } })
+           $router.push({ name: 'login', params: { ...values } })
+          console.log("跳转至登陆页面")
+          }else{
+            alert("注册失败，账号已存在")
+          }
+         }).catch(error => {
+             console.log(error)
+          })
+          // $router.push({ name: 'registerResult', params: { ...values } })
         }
       })
     },

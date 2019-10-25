@@ -6,6 +6,8 @@ const api = {
   twoStepCode: '/auth/2step-code',
   SendSms: '/account/sms',
   SendSmsErr: '/account/sms_err',
+  //register
+  Register: '/auth/register',
   // get my info
   UserInfo: '/user/info'
 }

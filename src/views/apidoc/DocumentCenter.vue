@@ -112,7 +112,8 @@ export default {
       },
       orgTree: [],
       selectedRowKeys: [],
-      selectedRows: []
+      selectedRows: [],
+      testData: ''
     }
   },
   created () {
