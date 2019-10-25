@@ -19,6 +19,13 @@ export function login (parameter) {
     data: parameter
   })
 }
+export function login2 (parameter) {
+  return axios({
+    url: '/login',
+    method: 'post',
+    data: parameter
+  })
+}
 
 export function getSmsCaptcha (parameter) {
   return axios({

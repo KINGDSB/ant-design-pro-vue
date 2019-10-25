@@ -137,7 +137,7 @@ export const asyncRouterMap = [
         name: 'apidoc',
         component: PageView,
         redirect: '/apidoc/document-center',
-        meta: { title: '接口文档', icon: 'table', permission: [ 'table' ] },
+        meta: { title: '接口文档', icon: 'file-word', permission: [ 'table' ] },
         children: [
           {
             path: '/apidoc/document-center',

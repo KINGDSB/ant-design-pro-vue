@@ -13,7 +13,7 @@
         @change="handleTabClick"
       >
         <a-tab-pane key="tab1" tab="账号密码登录">
-          <a-alert v-if="isLoginError" type="error" showIcon style="margin-bottom: 24px;" message="账户或密码错误（admin/ant.design )" />
+          <a-alert v-if="isLoginError" type="error" showIcon style="margin-bottom: 24px;" message="账户或密码错误（admin@qq.com/admin123 )" />
           <a-form-item>
             <a-input
               size="large"
@@ -190,8 +190,11 @@ export default {
           console.log('login form', values)
           const loginParams = { ...values }
           delete loginParams.username
-          loginParams[!state.loginType ? 'email' : 'username'] = values.username
-          loginParams.password = md5(values.password)
+          // loginParams[!state.loginType ? 'email' : 'username'] = values.username
+          loginParams['username'] = values.username
+          // loginParams.password = md5(values.password)
+          loginParams.password = values.password
+          // console.log('md5', loginParams.password)
           Login(loginParams)
             .then((res) => this.loginSuccess(res))
             .catch(err => this.requestFailed(err))

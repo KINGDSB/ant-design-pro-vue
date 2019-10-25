@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { login, getInfo, getInfo2, logout } from '@/api/login'
+import { login2, getInfo2, logout } from '@/api/login'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import { welcome } from '@/utils/util'
 
@@ -36,8 +36,11 @@ const user = {
     // 登录
     Login ({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
-        login(userInfo).then(response => {
-          const result = response.result
+        // login(userInfo).then(response => {
+        console.log('login info', userInfo)
+        login2(userInfo).then(response => {
+          console.log('login resp ', response)
+          const result = response.content
           Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
           commit('SET_TOKEN', result.token)
           resolve()
@@ -54,12 +57,10 @@ const user = {
         // getInfo().then(response => {
           console.log('############ getInfo ############')
           console.log(response)
-          const result = response
+          const result = response.content
 
           if (result.role && result.role.permissions.length > 0) {
-            console.log('result.role && result.role.permissions.length > 0')
             const role = result.role
-            console.log('role')
             role.permissions = result.role.permissions
             role.permissions.map(per => {
               if (per.actionEntitySet != null && per.actionEntitySet.length > 0) {
@@ -68,12 +69,9 @@ const user = {
               }
             })
             role.permissionList = role.permissions.map(permission => { return permission.permissionId })
-            console.log('role.permissionList')
-            console.log(role.permissionList)
             commit('SET_ROLES', result.role)
             commit('SET_INFO', result)
           } else {
-            console.log('else {')
             reject(new Error('getInfo: roles must be a non-null array !'))
           }
 
@@ -81,7 +79,6 @@ const user = {
           commit('SET_AVATAR', result.avatar)
 
           resolve(response)
-          console.log('############ resolve(response) ############')
         }).catch(error => {
           reject(error)
         })
