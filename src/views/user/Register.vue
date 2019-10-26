@@ -1,8 +1,8 @@
 <template>
   <div class="main user-layout-register">
-    <h3><span>注册</span></h3>
+    <h3><span></span></h3>
     <a-form ref="formRegister" :form="form" id="formRegister">
-      <a-form-item>
+      <a-form-item label="账号">
         <a-input
           size="large"
           type="text"
@@ -25,7 +25,7 @@
             </div>
           </div>
         </template>
-        <a-form-item>
+        <a-form-item label="密码">
           <a-input
             size="large"
             type="password"
@@ -37,7 +37,7 @@
         </a-form-item>
       </a-popover>
 
-      <a-form-item>
+      <a-form-item label="确认密码">
         <a-input
           size="large"
           type="password"
@@ -47,7 +47,38 @@
         ></a-input>
       </a-form-item>
 
-      <a-form-item>
+      <!-- <a-form-item v-bind="formItemLayout" label="E-mail">
+      <a-input
+        v-decorator="[
+          'email',
+          {
+            rules: [
+              {
+                type: 'email',
+                message: 'The input is not valid E-mail!',
+              },
+              {
+                required: true,
+                message: 'Please input your E-mail!',
+              },
+            ],
+          },
+        ]"
+      />
+    </a-form-item> -->
+
+      <a-form-item   
+        label="所属单位">
+         <a-input
+          size="large"
+          type="text"
+          autocomplete="false"
+          placeholder="所属单位"
+          v-decorator="['organization', {rules: [{ required: true, message: '填写正确单位名称' }], validateTrigger: ['change', 'blur']}]"
+        ></a-input>
+      </a-form-item>
+        
+      <a-form-item label="手机号">
         <a-input size="large" placeholder="11 位手机号" v-decorator="['mobile', {rules: [{ required: true, message: '请输入正确的手机号', pattern: /^1[3456789]\d{9}$/ }, { validator: this.handlePhoneCheck } ], validateTrigger: ['change', 'blur'] }]">
           <a-select slot="addonBefore" size="large" defaultValue="+86">
             <a-select-option value="+86">+86</a-select-option>
@@ -218,7 +249,7 @@ export default {
         if (!err) {
           state.passwordLevelChecked = false
 
-          console.log(values)
+          // console.log(values)
 
         //  xxxxApi({ 'str': 'userIdheiheihei' }).then(response => {
         //     console.log(response)
@@ -231,8 +262,8 @@ export default {
           console.log(respose)
           if(respose.code==200){
             alert("注册成功，即将跳转登陆页面")
-          //  $router.push({ name: 'registerResult', params: { ...values } })
-           $router.push({ name: 'login', params: { ...values } })
+            $router.push({ name: 'registerResult', params: { ...values } })
+          //  $router.push({ name: 'login', params: { ...values } })
           console.log("跳转至登陆页面")
           }else{
             alert("注册失败，账号已存在")
