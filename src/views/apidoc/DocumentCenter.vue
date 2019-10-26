@@ -54,7 +54,6 @@ import STree from '@/components/Tree/Tree'
 import { STable } from '@/components'
 import OrgModal from './modules/OrgModal'
 import { getOrgTree, getServiceList } from '@/api/manage'
-import { testApi } from '@/api/common'
 
 export default {
   name: 'DocumentCenter',
@@ -119,11 +118,6 @@ export default {
   created () {
     getOrgTree().then(res => {
       this.orgTree = res.result
-    })
-    testApi({ 'str': 'userIdheiheihei' }).then(response => {
-      console.log(response)
-    }).catch(error => {
-      console.log(error)
     })
   },
   methods: {
