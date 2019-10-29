@@ -7,7 +7,7 @@ const api = {
   SendSms: '/account/sms',
   SendSmsErr: '/account/sms_err',
   //项目申请
-  Applyof:'/auth/applyof',
+  ApplyOf:'/auth/applyof',
   //register
   Register: '/auth/register',
   // get my info
