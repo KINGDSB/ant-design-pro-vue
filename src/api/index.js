@@ -6,6 +6,8 @@ const api = {
   twoStepCode: '/auth/2step-code',
   SendSms: '/account/sms',
   SendSmsErr: '/account/sms_err',
+  //项目申请
+  Applyof:'/auth/applyof',
   //register
   Register: '/auth/register',
   // get my info

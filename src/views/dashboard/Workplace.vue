@@ -118,7 +118,6 @@ import HeadInfo from '@/components/tools/HeadInfo'
 import { Radar } from '@/components'
 
 import { getRoleList, getServiceList } from '@/api/manage'
-import { pageList } from '@/api/project'
 
 const DataSet = require('@antv/data-set')
 
@@ -177,17 +176,7 @@ export default {
         { item: '热度', a: 60, b: 70, c: 40 },
         { item: '引用', a: 70, b: 50, c: 40 }
       ],
-      radarData: [],
-      // 分页列表参数
-      pageListParam: {
-        userId: undefined,
-        bizId: undefined,
-        name: undefined,
-        start: undefined,
-        length: undefined
-      },
-      // 列表数据
-      pageListData: []
+      radarData: []
     }
   },
   computed: {
@@ -202,7 +191,6 @@ export default {
   created () {
     this.user = this.userInfo
     this.avatar = this.userInfo.avatar
-    // console.log('this.user', this.user)
 
     getRoleList().then(res => {
       // console.log('workplace -> call getRoleList()', res)
@@ -222,7 +210,6 @@ export default {
     getProjects () {
       this.$http.get('/list/search/projects')
         .then(res => {
-          console.log(res)
           this.projects = res.result && res.result.data
           this.loading = false
         })

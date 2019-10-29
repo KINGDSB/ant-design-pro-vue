@@ -11,37 +11,35 @@
           @titleClick="handleTitleClick"></s-tree>
       </a-col>
       <a-col :span="19">
-        <s-table
-          ref="table"
-          size="default"
-          :columns="columns"
-          :data="loadData"
-          :alert="false"
-          :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
-        >
-          <span slot="action" slot-scope="text, record">
-            <template v-if="$auth('table.update')">
-              <a @click="handleEdit(record)">编辑</a>
-              <a-divider type="vertical" />
-            </template>
-            <a-dropdown>
-              <a class="ant-dropdown-link">
-                更多 <a-icon type="down" />
-              </a>
-              <a-menu slot="overlay">
-                <a-menu-item>
-                  <a href="javascript:;">详情</a>
-                </a-menu-item>
-                <a-menu-item v-if="$auth('table.disable')">
-                  <a href="javascript:;">禁用</a>
-                </a-menu-item>
-                <a-menu-item v-if="$auth('table.delete')">
-                  <a href="javascript:;">删除</a>
-                </a-menu-item>
-              </a-menu>
-            </a-dropdown>
-          </span>
-        </s-table>
+       ------------------------- 
+    <page-view :title="title">
+    <a-card :bordered="false">
+      <div class="title">退货商品</div>
+      <s-table
+        style="margin-bottom: 24px"
+        row-key="id"
+        :columns="goodsColumns"
+        :data="loadGoodsData">
+
+      </s-table>
+
+      <div class="title">退货进度</div>
+      <s-table
+        style="margin-bottom: 24px"
+        row-key="key"
+        :columns="scheduleColumns"
+        :data="loadScheduleData">
+
+        <template
+          slot="status"
+          slot-scope="status">
+          <a-badge :status="status" :text="status | statusFilter"/>
+        </template>
+
+      </s-table>
+    </a-card>
+  </page-view>
+  ----------------------
       </a-col>
     </a-row>
 
@@ -54,6 +52,11 @@ import STree from '@/components/Tree/Tree'
 import { STable } from '@/components'
 import OrgModal from './modules/OrgModal'
 import { getOrgTree, getServiceList } from '@/api/manage'
+import { testApi } from '@/api/common'
+import { PageView } from '@/layouts'
+// import { STable } from '@/components'
+import DetailList from '@/components/tools/DetailList'
+const DetailListItem = DetailList.Item
 
 export default {
   name: 'DocumentCenter',
@@ -118,6 +121,11 @@ export default {
   created () {
     getOrgTree().then(res => {
       this.orgTree = res.result
+    })
+    testApi({ 'str': 'userIdheiheihei' }).then(response => {
+      console.log(response)
+    }).catch(error => {
+      console.log(error)
     })
   },
   methods: {

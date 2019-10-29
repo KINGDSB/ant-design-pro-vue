@@ -32,7 +32,7 @@ export const asyncRouterMap = [
         path: '/workplace',
         name: 'Workplace',
         component: () => import('@/views/dashboard/Workplace'),
-        meta: { title: '个人中心', keepAlive: true, icon: 'user', permission: [ 'dashboard' ] }
+        meta: { title: '个人中心', keepAlive: true, icon: bxAnaalyse, permission: [ 'dashboard' ] }
       },
 
       // dashboard
@@ -378,6 +378,11 @@ export const constantRouterMap = [
         path: 'register-result',
         name: 'registerResult',
         component: () => import(/* webpackChunkName: "user" */ '@/views/user/RegisterResult')
+      },
+      {
+        path: 'applyof',
+        name: 'applyof',
+        component: () => import(/* webpackChunkName: "user" */ '@/views/user/ApplyOf')
       },
       {
         path: 'recover',

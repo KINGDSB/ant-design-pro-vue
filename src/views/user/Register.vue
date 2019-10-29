@@ -2,6 +2,7 @@
   <div class="main user-layout-register">
     <h3><span></span></h3>
     <a-form ref="formRegister" :form="form" id="formRegister">
+      
       <a-form-item label="账号">
         <a-input
           size="large"
@@ -243,6 +244,7 @@ export default {
 
     handleSubmit () {
       const { form: { validateFields }, state, $router } = this
+      console.log("handleSubmit:")
       console.log('handleSubmit')
       validateFields({ force: true }, (err, values) => {
         console.log('validateFields111')
