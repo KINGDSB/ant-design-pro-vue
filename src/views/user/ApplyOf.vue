@@ -1,112 +1,87 @@
 <template>
   <div class="main user-layout-register">
-  <a-form :form="form" @submit="handleSubmit">
-    
-    <a-form-item v-bind="formItemLayout" label="申请人">
-      <a-input
-        v-decorator="[
-          'ApplyOfName',
-          {
-            rules: [
-              {
-                type: 'text',
-                message: '申请人不能为空!',
-              },
-              {
-                required: true,
-                message: '请正确填写姓名!',
-              },
-            ],
-          },
-        ]"
-      />
-    </a-form-item>
+    <h3><span></span></h3>
+    <a-form ref="formRegister" :form="form" id="formRegister">
+      <!-- <a-form-item   
+        label="所属单位">
+         <a-input
+          size="large"
+          type="text"
+          autocomplete="false"
+          placeholder="所属单位"
+          v-decorator="['organization', {rules: [{ required: true, message: '填写正确单位名称' }], validateTrigger: ['change', 'blur']}]"
+        ></a-input>
+      </a-form-item> -->
+        
+      <a-form-item   
+        label="申请人">
+         <a-input
+          size="large"
+          type="text"
+          autocomplete="false"
+          placeholder="申请人姓名"
+          v-decorator="['applyOfName', {rules: [{ required: true, message: '申请人姓名不能为空！' }], validateTrigger: ['change', 'blur']}]"
+        ></a-input>
+      </a-form-item>
 
-    <a-form-item v-bind="formItemLayout">
-      <span slot="label">
-        项目名称&nbsp;
-        <a-tooltip title="申请的项目名称">
-          <a-icon type="question-circle-o" />
-        </a-tooltip>
-      </span>
-      <a-input
-        v-decorator="[
-          'ApplyOfProjectName',
-          {
-            rules: [{ required: true, message: '项目名称不能为空!', whitespace: false }],
-          },
-        ]"
-      />
-    </a-form-item>
-    <a-form-item v-bind="formItemLayout" label="申请接口">
-      <a-cascader
-        v-decorator="[
-          'ApplyOfPort',
-          {
-            initialValue: ['zhejiang', 'hangzhou', 'xihu'],
-            rules: [
-              { type: 'array', required: true, message: 'Please select your habitual residence!' },
-            ],
-          },
-        ]"
-        :options="ApplyOfPort"
-      />
-    </a-form-item>
-   
-    <a-form-item v-bind="tailFormItemLayout">
-      <a-button 
-      type="primary" 
-      html-type="submit"
-      
-      @click.stop.prevent="handleApplyOf"
-      >提交
-      </a-button>
-    </a-form-item>
-  </a-form>
+      <a-form-item   
+        label="项目名称">
+         <a-input
+          size="large"
+          type="text"
+          autocomplete="false"
+          placeholder="填写项目名称"
+          v-decorator="['applyOfProjectName', {rules: [{ required: true, message: '项目名称不能为空！' }], validateTrigger: ['change', 'blur']}]"
+        ></a-input>
+      </a-form-item>
+
+      <a-form-item   
+        label="申请接口">
+         <a-input
+          size="large"
+          type="text"
+          autocomplete="false"
+          placeholder="填写需要申请的接口"
+          v-decorator="['applyOfPort', {rules: [{ required: true, message: '请填写需要申请的接口' }], validateTrigger: ['change', 'blur']}]"
+        ></a-input>
+      </a-form-item>
+
+      <a-form-item   
+        label="申请日期">
+         <a-input
+          size="large"
+          type="text"
+          autocomplete="false"
+          placeholder="申请日期"
+          v-decorator="['applyOfDate', {rules: [{ required: true, message: '日期不能为空' }], validateTrigger: ['change', 'blur']}]"
+        ></a-input>
+      </a-form-item>
+
+      <a-form-item>
+        <a-button
+          size="large"
+          type="primary"
+          htmlType="submit"
+          class="register-button"
+          :loading="registerBtn"
+          @click.stop.prevent="handleSubmit"
+          :disabled="registerBtn">提交
+        </a-button>
+        <router-link class="workplace" :to="{ name: 'Workplace' }">返回个人中心</router-link>
+        <!-- $router.push({ name: 'Workplace', params: { ...values } }) -->
+      </a-form-item>
+    </a-form>
   </div>
 </template>
 
 <script>
 import { mixinDevice } from '@/utils/mixin.js'
+import { getSmsCaptcha } from '@/api/login'
 import {applyof} from '@/api/applyof'
 import {Workplace} from '@/views/dashboard/Workplace'
-const ApplyOfPort = [
-  {
-    value: 'zhejiang',
-    label: 'Zhejiang',
-    children: [
-      {
-        value: 'hangzhou',
-        label: 'Hangzhou',
-        children: [
-          {
-            value: 'xihu',
-            label: 'West Lake',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-          },
-        ],
-      },
-    ],
-  },
-];
 
 export default {
-  name: 'ApplyOf',
+  name: 'Register',
   components: {
   },
   mixins: [mixinDevice],
@@ -125,61 +100,22 @@ export default {
       registerBtn: false
     }
   },
-  data() {
-    return {
-      confirmDirty: false,
-      ApplyOfPort,
-      autoCompleteResult: [],
-      formItemLayout: {
-        labelCol: {
-          xs: { span: 24 },
-          sm: { span: 8 },
-        },
-        wrapperCol: {
-          xs: { span: 24 },
-          sm: { span: 16 },
-        },
-      },
-      tailFormItemLayout: {
-        wrapperCol: {
-          xs: {
-            span: 24,
-            offset: 0,
-          },
-          sm: {
-            span: 16,
-            offset: 8,
-          },
-        },
-      },
-    };
-  },
-  beforeCreate() {
-    this.form = this.$form.createForm(this, { name: 'register' });
+  computed: {
+    passwordLevelClass () {
+      return levelClass[this.state.passwordLevel]
+    },
+    passwordLevelName () {
+      return levelNames[this.state.passwordLevel]
+    },
+    passwordLevelColor () {
+      return levelColor[this.state.passwordLevel]
+    }
   },
   methods: {
-    handleSubmit(e) {
-      e.preventDefault();
-      this.form.validateFieldsAndScroll((err, values) => {
-        if (!err) {
-          console.log('Received values of form: ', values);
-        }
-      });
-    },
-    
-    handleWebsiteChange(value) {
-      let autoCompleteResult;
-      if (!value) {
-        autoCompleteResult = [];
-      } else {
-        autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
-      }
-      this.autoCompleteResult = autoCompleteResult;
-    },
-    //申请的方法
-     handleApplyOf () {
+    handleSubmit () {
       const { form: { validateFields }, state, $router } = this
-      console.log('handleApplyOf')
+      console.log("handleSubmit:")
+      console.log('handleSubmit')
       validateFields({ force: true }, (err, values) => {
         console.log('validateFields111')
         if (!err) {
@@ -197,10 +133,11 @@ export default {
         applyof(values).then(respose =>{
           console.log(respose)
           if(respose.code==200){
-            alert("申请提交，请耐心等待")
+            alert("已提交申请，申请进度可在个人中心查看")
             $router.push({ name: 'Workplace', params: { ...values } })
+            // $router.push({ name: 'registerResult', params: { ...values } })
           //  $router.push({ name: 'login', params: { ...values } })
-          console.log("跳转至个人中心")
+          // console.log("跳转至登陆页面")
           }else{
             alert("提交失败，请重试")
           }
@@ -210,7 +147,67 @@ export default {
           // $router.push({ name: 'registerResult', params: { ...values } })
         }
       })
+    },
+    requestFailed (err) {
+      this.$notification['error']({
+        message: '错误',
+        description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
+        duration: 4
+      })
+      this.registerBtn = false
     }
   },
-};
+  watch: {
+    'state.passwordLevel' (val) {
+      console.log(val)
+    }
+  }
+}
 </script>
+<style lang="less">
+  .user-register {
+
+    &.error {
+      color: #ff0000;
+    }
+
+    &.warning {
+      color: #ff7e05;
+    }
+
+    &.success {
+      color: #52c41a;
+    }
+
+  }
+
+  .user-layout-register {
+    .ant-input-group-addon:first-child {
+      background-color: #fff;
+    }
+  }
+</style>
+<style lang="less" scoped>
+  .user-layout-register {
+
+    & > h3 {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .getCaptcha {
+      display: block;
+      width: 100%;
+      height: 40px;
+    }
+
+    .register-button {
+      width: 50%;
+    }
+
+    .workplace {
+      float: right;
+      line-height: 40px;
+    }
+  }
+</style>

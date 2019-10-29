@@ -385,11 +385,6 @@ export const constantRouterMap = [
         component: () => import(/* webpackChunkName: "user" */ '@/views/user/ApplyOf')
       },
       {
-        path: 'applyof2',
-        name: 'applyof2',
-        component: () => import(/* webpackChunkName: "user" */ '@/views/user/ApplyOf2')
-      },
-      {
         path: 'recover',
         name: 'recover',
         component: undefined
