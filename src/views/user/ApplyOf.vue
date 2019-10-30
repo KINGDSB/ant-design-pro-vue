@@ -44,18 +44,51 @@
           placeholder="填写需要申请的接口"
           v-decorator="['applyOfPort', {rules: [{ required: true, message: '请填写需要申请的接口' }], validateTrigger: ['change', 'blur']}]"
         ></a-input>
+          <a-select 
+          size="large" 
+          mode="tags" 
+          style="width: 100%" :tokenSeparators="[',']" @change="handleChange">
+              <a-select-option 
+              v-for="i in 25" :key="(i + 9).toString(36) + i"
+              >{{(i + 9).toString(36) + i}}
+              </a-select-option>
+             </a-select>
+            <div class="item-group">
+
+               <a-checkbox-group @change="onChange">
+                  <a-row>
+                    <a-col :span="8"><a-checkbox value="A">支付</a-checkbox></a-col>
+                    <a-col :span="8"><a-checkbox value="B">调用</a-checkbox></a-col>
+                    <a-col :span="8"><a-checkbox value="C">分页</a-checkbox></a-col>
+                    <a-col :span="8"><a-checkbox value="D">购物车</a-checkbox></a-col>
+                    <a-col :span="8"><a-checkbox value="E">注册</a-checkbox></a-col>
+                </a-row>
+                </a-checkbox-group>
+              
+            </div>
       </a-form-item>
 
       <a-form-item   
         label="申请日期">
-         <a-input
+         <!-- <a-input
           size="large"
           type="text"
           autocomplete="false"
           placeholder="申请日期"
           v-decorator="['applyOfDate', {rules: [{ required: true, message: '日期不能为空' }], validateTrigger: ['change', 'blur']}]"
-        ></a-input>
+        >
+        </a-input> -->
+        <div>
+        <a-date-picker>
+          <template slot="dateRender" slot-scope="current, today">
+            <div class="ant-calendar-date" :style="getCurrentStyle(current, today)">
+              {{current.date()}}
+            </div>
+          </template>
+        </a-date-picker>
+      </div>
       </a-form-item>
+      
 
       <a-form-item>
         <a-button
@@ -74,12 +107,26 @@
   </div>
 </template>
 
+<!--<template>
+ <a-card title="快速开始 / 便捷导航" style="margin-bottom: 24px" :bordered="false" :body-style="{padding: 0}">
+            <div class="item-group">
+              <a>操作一</a>
+              <a>操作二</a>
+              <a>操作三</a>
+              <a>操作四</a>
+              <a>操作五</a>
+              <a>操作六</a>
+              <a-button size="small" type="primary" ghost icon="plus">添加</a-button>
+            </div>
+          </a-card>
+</template> -->
+
 <script>
 import { mixinDevice } from '@/utils/mixin.js'
 import { getSmsCaptcha } from '@/api/login'
 import {applyof} from '@/api/applyof'
 import {Workplace} from '@/views/dashboard/Workplace'
-
+// import {getPort} from '@/api/getport'
 export default {
   name: 'Register',
   components: {
@@ -114,10 +161,8 @@ export default {
   methods: {
     handleSubmit () {
       const { form: { validateFields }, state, $router } = this
-      console.log("handleSubmit:")
-      console.log('handleSubmit')
       validateFields({ force: true }, (err, values) => {
-        console.log('validateFields111')
+        // console.log('validateFields111')
         if (!err) {
           state.passwordLevelChecked = false
 
@@ -161,7 +206,24 @@ export default {
     'state.passwordLevel' (val) {
       console.log(val)
     }
-  }
+  },
+  //多选框方法传值处
+  onChange(checkedValues) {
+        console.log('checked = ', checkedValues);
+      },
+  //选择器传参
+  handleChange(value) {
+        console.log(`applyOfPort ${value}`);
+      },
+  //日期类
+  getCurrentStyle(current, today) {
+        const style = {};
+        if (current.date() === 1) {
+          style.border = '1px solid #1890ff';
+          style.borderRadius = '50%';
+        }
+        return style;
+      },    
 }
 </script>
 <style lang="less">
@@ -209,5 +271,17 @@ export default {
       float: right;
       line-height: 40px;
     }
+
+    .item-group {
+    padding: 20px 0 8px 24px;
+    font-size: 0;
+    a {
+      color: rgba(0, 0, 0, 0.65);
+      display: inline-block;
+      font-size: 14px;
+      margin-bottom: 13px;
+      width: 25%;
+    }
+  }
   }
 </style>

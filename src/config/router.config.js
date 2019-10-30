@@ -24,6 +24,12 @@ export const asyncRouterMap = [
             name: 'DocumentCenter',
             component: () => import('@/views/apidoc/DocumentCenter'),
             meta: { title: '文档中心', keepAlive: true, permission: [ 'table' ] }
+          },
+          {
+            path: '/applyof',
+            name: 'ApplyOf',
+            component: () => import('@/views/user/ApplyOf'),
+            meta: { title: '接口申请', keepAlive: true, permission: [ 'table' ] }
           }
         ]
       },
