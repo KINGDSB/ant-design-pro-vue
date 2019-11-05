@@ -124,7 +124,7 @@
 <script>
 import { mixinDevice } from '@/utils/mixin.js'
 import { getSmsCaptcha } from '@/api/login'
-import {applyof} from '@/api/applyof'
+import {addApplyof} from '@/api/addApplyof'
 import {Workplace} from '@/views/dashboard/Workplace'
 // import {getPort} from '@/api/getport'
 export default {
@@ -175,7 +175,7 @@ export default {
         //   })
         // values['userName'] = values.email
         console.log(values)
-        applyof(values).then(respose =>{
+        addApplyof(values).then(respose =>{
           console.log(respose)
           if(respose.code==200){
             alert("已提交申请，申请进度可在个人中心查看")

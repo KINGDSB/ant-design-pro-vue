@@ -1,9 +1,9 @@
-import api from './applyof'
+import api from './applyofAll'
 import { axios } from '@/utils/request'
 
-export function applyof (parameter) {
+export function applyofAll (parameter) {
     return axios({
-      url: '/auth/applyof',
+      url: '/applyof/applyofAll',
       method: 'post',
       data: parameter
     })

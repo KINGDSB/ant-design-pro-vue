@@ -73,6 +73,7 @@
 <script>
 import HeadInfo from '@/components/tools/HeadInfo'
 import TaskForm from './modules/TaskForm'
+import {applyofAll} from '@/api/applyofAll'
 
 const data = []
 data.push({
