@@ -22,6 +22,21 @@
         :data="loadGoodsData">
 
       </s-table>
+
+      <div class="title">退货进度</div>
+      <s-table
+        style="margin-bottom: 24px"
+        row-key="key"
+        :columns="scheduleColumns"
+        :data="loadScheduleData">
+
+        <template
+          slot="status"
+          slot-scope="status">
+          <a-badge :status="status" :text="status | statusFilter"/>
+        </template>
+
+      </s-table>
     </a-card>
   </page-view>
   ----------------------
@@ -48,10 +63,7 @@ export default {
   components: {
     STable,
     STree,
-    OrgModal,
-    DetailList,
-    DetailListItem,
-    STable
+    OrgModal
   },
   data () {
     return {
@@ -91,41 +103,6 @@ export default {
           dataIndex: 'action',
           width: '150px',
           scopedSlots: { customRender: 'action' }
-        }
-      ],
-      goodsColumns: [
-        {
-          title: '接口编号',
-          dataIndex: 'id',
-          key: 'id'
-        },
-        {
-          title: '接口名称',
-          dataIndex: 'name',
-          key: 'name'
-        },
-        {
-          title: '接口URL地址',
-          dataIndex: 'barcode',
-          key: 'barcode'
-        },
-        {
-          title: '单价',
-          dataIndex: 'price',
-          key: 'price',
-          align: 'right'
-        },
-        {
-          title: '数量（件）',
-          dataIndex: 'num',
-          key: 'num',
-          align: 'right'
-        },
-        {
-          title: '金额',
-          dataIndex: 'amount',
-          key: 'amount',
-          align: 'right'
         }
       ],
       // 加载数据方法 必须为 Promise 对象

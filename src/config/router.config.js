@@ -30,6 +30,12 @@ export const asyncRouterMap = [
             name: 'ApplyOf',
             component: () => import('@/views/user/ApplyOf'),
             meta: { title: '接口申请', keepAlive: true, permission: [ 'table' ] }
+          },
+          {
+            path: '/applyof/test-work',
+            name: 'TestWork',
+            component: () => import('@/views/user/PortTest'),
+            meta: { title: '接口测试', keepAlive: true, permission: [ 'table' ] }
           }
         ]
       },
@@ -39,6 +45,36 @@ export const asyncRouterMap = [
         name: 'Workplace',
         component: () => import('@/views/dashboard/Workplace'),
         meta: { title: '个人中心', keepAlive: true, icon: bxAnaalyse, permission: [ 'dashboard' ] }
+      },
+      
+      // list
+      {
+        path: '/author',
+        name: 'author',
+        component: PageView,
+        redirect: '/author/author-list',
+        meta: { title: '审批', icon: 'table', permission: [ 'table' ] },
+        children: [
+          {
+            path: '/author/Author',
+            name: 'Author',
+            component: () => import('@/views/author/Author'),
+            meta: { title: '审批页面', keepAlive: true, permission: [ 'table' ] }
+          },
+          {
+            path: '/author/authorAistory/:pageNo([1-9]\\d*)?',
+            name: 'AuthorHistory',
+            hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
+            component: () => import('@/views/author/AuthorHistory'),
+            meta: { title: '审批记录', keepAlive: true, permission: [ 'table' ] }
+          },
+          {
+            path: '/author/authorIndex',
+            name: 'AuthorIndex',
+            component: () => import('@/views/author/AuthorIndex'),
+            meta: { title: '审批详情页', permission: [ 'table' ] }
+          },
+        ]
       },
 
       // dashboard
