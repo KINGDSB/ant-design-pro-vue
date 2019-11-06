@@ -22,117 +22,141 @@
       <div slot="extra">
         <a-radio-group v-model="status">
           <a-radio-button value="all">全部</a-radio-button>
-          <a-radio-button value="processing">进行中</a-radio-button>
-          <a-radio-button value="waiting">等待中</a-radio-button>
+          <a-radio-button value="processing">正在申请</a-radio-button>
+          <a-radio-button value="waiting">已审批</a-radio-button>
         </a-radio-group>
         <a-input-search style="margin-left: 16px; width: 272px;" />
       </div>
-
-      <div class="operate">
+      <!-- <div class="operate">
         <a-button type="dashed" style="width: 100%" icon="plus" @click="$refs.taskForm.add()">添加</a-button>
-      </div>
-
+      </div> -->
       <a-list size="large" :pagination="{showSizeChanger: true, showQuickJumper: true, pageSize: 5, total: 50}">
         <a-list-item :key="index" v-for="(item, index) in data">
-          <a-list-item-meta :description="item.description">
+          <a-list-item-meta :description="item.applyOfPort">
             <a-avatar slot="avatar" size="large" shape="square" :src="item.avatar"/>
-            <a slot="title">{{ item.title }}</a>
+            <a slot="title">{{ item.applyOfProjectName }}</a>
           </a-list-item-meta>
           <!-- 路由至详情页 -->
            <router-link slot="actions" class="less" :to="{ name: 'AuthorIndex' }">详情</router-link>
           <div slot="actions">
             <a-dropdown>
               <a-menu slot="overlay">
-                <a-menu-item><a>编辑</a></a-menu-item>
-                <a-menu-item><a>删除</a></a-menu-item>
+                <a-menu-item><a>同意</a></a-menu-item>
+                <a-menu-item><a>拒绝</a></a-menu-item>
               </a-menu>
-              <a>更多<a-icon type="down"/></a>
+              <a>审批<a-icon type="down"/></a>
             </a-dropdown>
           </div>
-          <div class="list-content">
+          
+          <div id="applyOf" class="list-content">
             <div class="list-content-item">
-              <span>Owner</span>
-              <p>{{ item.owner }}</p>
+              <span>项目名称</span>
+              <p>{{ item.applyOfProjectName }}</p>
             </div>
             <div class="list-content-item">
-              <span>开始时间</span>
-              <p>{{ item.startAt }}</p>
+              <span>申请人</span>
+              <p>{{ item.applyOfName }}</p>
             </div>
             <div class="list-content-item">
-              <a-progress :percent="item.progress.value" :status="!item.progress.status ? null : item.progress.status" style="width: 180px" />
+              <span>申请时间</span>
+              <p>{{ item.applyOfDate }}</p>
+            </div>
+            <div class="list-content-Text">
+              <!-- <a-progress :percent="item.progress.value" :status="!item.progress.status ? null : item.progress.status" style="width: 180px" /> -->
+              <span>申请状态</span>
+              <p>{{ item.applyOfStatus }}</p>
             </div>
           </div>
         </a-list-item>
       </a-list>
 
-      <task-form ref="taskForm" />
+      <!-- <task-form ref="taskForm" /> -->
     </a-card>
   </div>
 </template>
-
 <script>
 import HeadInfo from '@/components/tools/HeadInfo'
-import TaskForm from './modules/TaskForm'
+// import TaskForm from './modules/TaskForm'
 import {applyofAll} from '@/api/applyofAll'
-
+import {applyofDetail} from '@/api/applyofAll'
 const data = []
+  // if(true){
+  //   applyofAll(values).then(respose =>{
+  //         console.log(respose)
+  //         if(respose.code==200){
+  //           alert("注册成功，即将跳转登陆页面")
+  //           $router.push({ name: 'registerResult', params: { ...values } })
+  //         //  $router.push({ name: 'login', params: { ...values } })
+  //         console.log("跳转至登陆页面")
+  //         }else{
+  //           alert("注册失败，账号已存在")
+  //         }
+  //        }).catch(error => {
+  //            console.log(error)
+  //         })
+  // }
 data.push({
-  title: 'Alipay',
+  applyOfProjectName: 'Alipay',
   avatar: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
-  description: '那是一种内在的东西， 他们到达不了，也无法触及的',
-  owner: '付晓晓',
-  startAt: '2018-07-26 22:44',
-  progress: {
+  applyOfPort: '支付、审批、申请、入库、登录、注册、查询、调用、购物车、秒杀、搜索、订单',
+  applyOfName: '付晓晓',
+  applyOfDate: '2018-07-26 22:44',
+  /* progress: {
     value: 90
-  }
+  } */
+  applyOfStatus: '申请中'
 })
 data.push({
-  title: 'Angular',
+  applyOfProjectName: 'Angular',
   avatar: 'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png',
-  description: '希望是一个好东西，也许是最好的，好东西是不会消亡的',
-  owner: '曲丽丽',
-  startAt: '2018-07-26 22:44',
-  progress: {
+  applyOfPort: '支付、审批、申请、入库、登录、注册、查询、调用、购物车、秒杀、搜索、订单',
+  applyOfName: '曲丽丽',
+  applyOfDate: '2018-07-26 22:44',
+  /* progress: {
     value: 54
-  }
+  } */
+  applyOfStatus: '申请中'
 })
 data.push({
-  title: 'Ant Design',
+  applyOfProjectName: 'Ant Design',
   avatar: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
-  description: '生命就像一盒巧克力，结果往往出人意料',
-  owner: '林东东',
-  startAt: '2018-07-26 22:44',
-  progress: {
+  applyOfPort: '支付、审批、申请、入库、登录、注册、查询、调用、购物车、秒杀、搜索、订单',
+  applyOfName: '林东东',
+  applyOfDate: '2018-07-26 22:44',
+ /*  progress: {
     value: 66
-  }
+  } */
+  applyOfStatus: '申请中'
 })
 data.push({
-  title: 'Ant Design Pro',
+  applyOfProjectName: 'Ant Design',
   avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png',
-  description: '城镇中有那么多的酒馆，她却偏偏走进了我的酒馆',
-  owner: '周星星',
-  startAt: '2018-07-26 22:44',
-  progress: {
+  applyOfPort: '支付、审批、申请、入库、登录、注册、查询、调用、购物车、秒杀、搜索、订单',
+  applyOfName: '周星星',
+  applyOfDate: '2018-07-26 22:44',
+  /* progress: {
     value: 30
-  }
+  } */
+  applyOfStatus: '申请中'
 })
 data.push({
-  title: 'Bootstrap',
+  applyOfProjectName: 'Bootstrap',
   avatar: 'https://gw.alipayobjects.com/zos/rmsportal/siCrBXXhmvTQGWPNLBow.png',
-  description: '那时候我只会想自己想要什么，从不想自己拥有什么',
-  owner: '吴加好',
-  startAt: '2018-07-26 22:44',
-  progress: {
+  applyOfPort: '支付、审批、申请、入库、登录、注册、查询、调用、购物车、秒杀、搜索、订单',
+  applyOfName: '吴加好',
+  applyOfDate: '2018-07-26 22:44',
+  /* progress: {
     status: 'exception',
     value: 100
-  }
+  } */
+  applyOfStatus: '申请中'
 })
 
 export default {
   name: 'StandardList',
   components: {
     HeadInfo,
-    TaskForm
+    // TaskForm
   },
   data () {
     return {
@@ -160,6 +184,23 @@ export default {
             line-height: 20px;
         }
         p {
+            margin-top: 4px;
+            margin-bottom: 0;
+            line-height: 22px;
+        }
+    }
+    
+    .list-content-Text {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 14px;
+        margin-left: 40px;
+        span {
+            color: rgba(0, 0, 0, .45);
+            line-height: 20px;
+        }
+        p {
+            color: rgba(247, 6, 6, 0.45);
             margin-top: 4px;
             margin-bottom: 0;
             line-height: 22px;

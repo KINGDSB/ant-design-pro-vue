@@ -124,7 +124,7 @@
 <script>
 import { mixinDevice } from '@/utils/mixin.js'
 import { getSmsCaptcha } from '@/api/login'
-import {addApplyof} from '@/api/addApplyof'
+import {addApplyof} from '@/api/applyofAll'
 import {Workplace} from '@/views/dashboard/Workplace'
 // import {getPort} from '@/api/getport'
 export default {

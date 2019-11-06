@@ -32,6 +32,7 @@
 import { PageView } from '@/layouts'
 import { STable } from '@/components'
 import DetailList from '@/components/tools/DetailList'
+import {applyofDetail} from '@/api/applyofAll'
 const DetailListItem = DetailList.Item
 
 export default {

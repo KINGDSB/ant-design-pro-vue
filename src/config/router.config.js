@@ -25,10 +25,16 @@ export const asyncRouterMap = [
             component: () => import('@/views/apidoc/DocumentCenter'),
             meta: { title: '文档中心', keepAlive: true, permission: [ 'table' ] }
           },
-          {
+          /* {
             path: '/applyof',
             name: 'ApplyOf',
             component: () => import('@/views/user/ApplyOf'),
+            meta: { title: '接口申请', keepAlive: true, permission: [ 'table' ] }
+          }, */
+          {
+            path: 'applyof',
+            name: 'applyof',
+            component: () => import(/* webpackChunkName: "user" */ '@/views/user/ApplyOf'),
             meta: { title: '接口申请', keepAlive: true, permission: [ 'table' ] }
           },
           {
