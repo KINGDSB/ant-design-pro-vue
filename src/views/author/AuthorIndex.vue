@@ -25,6 +25,20 @@
         :data="loadGoodsData">
       </s-table>
     </a-card>
+    <div class="btn-box">
+      <Btn 
+        :btnData="{text: '同意'}"
+        @confirm="confirm"
+        ref="btn"
+      ></Btn>
+    </div> 
+    <div class="btn-nobox">
+    <!-- <Btn 
+        :btnData="{text: '拒绝'}"
+        @confirm="confirm"
+        ref="btn"
+      ></Btn> -->
+     </div>  
   </page-view>
 </template>
 
@@ -33,14 +47,24 @@ import { PageView } from '@/layouts'
 import { STable } from '@/components'
 import DetailList from '@/components/tools/DetailList'
 import {applyofDetail} from '@/api/applyofAll'
+import Btn from '@/utils/button'
 const DetailListItem = DetailList.Item
 
 export default {
   components: {
     DetailList,
     DetailListItem,
-    STable
+    STable,
+    Btn
   },
+  methods: {
+    confirm(){
+      if(!this.companyName){
+        this.$toast("公司名不能为空")  
+        this.$refs.btn.cancel()
+      }
+  }
+},
   data () {
     return {
       goodsColumns: [

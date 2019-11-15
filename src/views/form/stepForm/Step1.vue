@@ -2,18 +2,18 @@
   <div>
     <a-form :form="form" style="max-width: 500px; margin: 40px auto 0;">
       <a-form-item
-        label="付款账户"
+        label="申请人"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
         <a-select
           placeholder="ant-design@alipay.com"
-          v-decorator="['paymentUser', { rules: [{required: true, message: '付款账户必须填写'}] }]">
+          v-decorator="['paymentUser', { rules: [{required: true, message: '申请接口必须填写'}] }]">
           <a-select-option value="1">ant-design@alipay.com</a-select-option>
         </a-select>
       </a-form-item>
       <a-form-item
-        label="收款账户"
+        label="申请接口"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
@@ -32,14 +32,14 @@
         </a-input-group>
       </a-form-item>
       <a-form-item
-        label="收款人姓名"
+        label="项目名称"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
         <a-input v-decorator="['name', { initialValue: 'Alex', rules: [{required: true, message: '收款人名称必须核对'}] }]"/>
       </a-form-item>
       <a-form-item
-        label="转账金额"
+        label="金额"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
@@ -52,10 +52,10 @@
     <a-divider />
     <div class="step-form-style-desc">
       <h3>说明</h3>
-      <h4>转账到支付宝账户</h4>
-      <p>如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p>
+      <h4>请认真填写申请信息</h4>
+      <!-- <p>如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p>
       <h4>转账到银行卡</h4>
-      <p>如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p>
+      <p>如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p> -->
     </div>
   </div>
 </template>

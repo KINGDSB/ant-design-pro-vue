@@ -2,16 +2,6 @@
   <div class="main user-layout-register">
     <h3><span></span></h3>
     <a-form ref="formRegister" :form="form" id="formRegister">
-      <!-- <a-form-item   
-        label="所属单位">
-         <a-input
-          size="large"
-          type="text"
-          autocomplete="false"
-          placeholder="所属单位"
-          v-decorator="['organization', {rules: [{ required: true, message: '填写正确单位名称' }], validateTrigger: ['change', 'blur']}]"
-        ></a-input>
-      </a-form-item> -->
         
       <a-form-item   
         label="申请人">
@@ -44,28 +34,7 @@
           placeholder="填写需要申请的接口"
           v-decorator="['applyOfPort', {rules: [{ required: true, message: '请填写需要申请的接口' }], validateTrigger: ['change', 'blur']}]"
         ></a-input>
-          <a-select 
-          size="large" 
-          mode="tags" 
-          style="width: 100%" :tokenSeparators="[',']" @change="handleChange">
-              <a-select-option 
-              v-for="i in 25" :key="(i + 9).toString(36) + i"
-              >{{(i + 9).toString(36) + i}}
-              </a-select-option>
-             </a-select>
-            <div class="item-group">
-
-               <a-checkbox-group @change="onChange">
-                  <a-row>
-                    <a-col :span="8"><a-checkbox value="A">支付</a-checkbox></a-col>
-                    <a-col :span="8"><a-checkbox value="B">调用</a-checkbox></a-col>
-                    <a-col :span="8"><a-checkbox value="C">分页</a-checkbox></a-col>
-                    <a-col :span="8"><a-checkbox value="D">购物车</a-checkbox></a-col>
-                    <a-col :span="8"><a-checkbox value="E">注册</a-checkbox></a-col>
-                </a-row>
-                </a-checkbox-group>
-              
-            </div>
+    
       </a-form-item>
 
       <a-form-item   
@@ -208,9 +177,9 @@ export default {
     }
   },
   //多选框方法传值处
-  onChange(checkedValues) {
-        console.log('checked = ', checkedValues);
-      },
+  // onChange(checkedValues) {
+  //       console.log('checked = ', checkedValues);
+  //     },
   //选择器传参
   handleChange(value) {
         console.log(`applyOfPort ${value}`);
@@ -272,16 +241,16 @@ export default {
       line-height: 40px;
     }
 
-    .item-group {
-    padding: 20px 0 8px 24px;
-    font-size: 0;
-    a {
-      color: rgba(0, 0, 0, 0.65);
-      display: inline-block;
-      font-size: 14px;
-      margin-bottom: 13px;
-      width: 25%;
-    }
-  }
+  //   .item-group {
+  //   padding: 20px 0 8px 24px;
+  //   font-size: 0;
+  //   a {
+  //     color: rgba(0, 0, 0, 0.65);
+  //     display: inline-block;
+  //     font-size: 14px;
+  //     margin-bottom: 13px;
+  //     width: 25%;
+  //   }
+  // }
   }
 </style>

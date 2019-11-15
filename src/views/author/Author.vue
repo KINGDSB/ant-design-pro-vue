@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :bordered="false">
+    <!-- <a-card :bordered="false">
       <a-row>
         <a-col :sm="8" :xs="24">
           <head-info title="我的待办" content="8个任务" :bordered="true"/>
@@ -12,7 +12,7 @@
           <head-info title="本周完成任务数" content="24个"/>
         </a-col>
       </a-row>
-    </a-card>
+    </a-card> -->
 
     <a-card
       style="margin-top: 24px"
@@ -22,8 +22,8 @@
       <div slot="extra">
         <a-radio-group v-model="status">
           <a-radio-button value="all">全部</a-radio-button>
-          <a-radio-button value="processing">正在申请</a-radio-button>
-          <a-radio-button value="waiting">已审批</a-radio-button>
+          <a-radio-button value="applyofing">正在申请</a-radio-button>
+          <a-radio-button value="applyofon">已审批</a-radio-button>
         </a-radio-group>
         <a-input-search style="margin-left: 16px; width: 272px;" />
       </div>
@@ -70,31 +70,18 @@
         </a-list-item>
       </a-list>
 
-      <!-- <task-form ref="taskForm" /> -->
+     
     </a-card>
   </div>
 </template>
 <script>
 import HeadInfo from '@/components/tools/HeadInfo'
-// import TaskForm from './modules/TaskForm'
+
 import {applyofAll} from '@/api/applyofAll'
 import {applyofDetail} from '@/api/applyofAll'
+
 const data = []
-  // if(true){
-  //   applyofAll(values).then(respose =>{
-  //         console.log(respose)
-  //         if(respose.code==200){
-  //           alert("注册成功，即将跳转登陆页面")
-  //           $router.push({ name: 'registerResult', params: { ...values } })
-  //         //  $router.push({ name: 'login', params: { ...values } })
-  //         console.log("跳转至登陆页面")
-  //         }else{
-  //           alert("注册失败，账号已存在")
-  //         }
-  //        }).catch(error => {
-  //            console.log(error)
-  //         })
-  // }
+
 data.push({
   applyOfProjectName: 'Alipay',
   avatar: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',

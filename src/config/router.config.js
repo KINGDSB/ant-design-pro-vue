@@ -38,6 +38,12 @@ export const asyncRouterMap = [
             meta: { title: '接口申请', keepAlive: true, permission: [ 'table' ] }
           },
           {
+            path: '/form/step-form',
+            name: 'ApplyStepForm',
+            component: () => import('@/views/form/stepForm/StepForm'),
+            meta: { title: '接口申请2', keepAlive: true, permission: [ 'form' ] }
+          },
+          {
             path: '/applyof/test-work',
             name: 'TestWork',
             component: () => import('@/views/user/PortTest'),
@@ -52,7 +58,12 @@ export const asyncRouterMap = [
         component: () => import('@/views/dashboard/Workplace'),
         meta: { title: '个人中心', keepAlive: true, icon: bxAnaalyse, permission: [ 'dashboard' ] }
       },
-      
+      {
+        path: '/workplace/index',
+        name: 'x/index',
+        component: () => import('@/views/user/Index'),
+        meta: { title: '首页', keepAlive: true, icon: bxAnaalyse, permission: [ 'dashboard' ] }
+      },
       // list
       {
         path: '/author',
@@ -66,6 +77,18 @@ export const asyncRouterMap = [
             name: 'Author',
             component: () => import('@/views/author/Author'),
             meta: { title: '审批页面', keepAlive: true, permission: [ 'table' ] }
+          },
+          {
+            path: '/author/Author2',
+            name: 'Author2',
+            component: () => import('@/views/author/Author2'),
+            meta: { title: '审批页面2', keepAlive: true, permission: [ 'table' ] }
+          },
+          {
+            path: '/author/Author3',
+            name: 'Author3',
+            component: () => import('@/views/author/Author3'),
+            meta: { title: '审批页面3', keepAlive: true, permission: [ 'table' ] }
           },
           {
             path: '/author/authorAistory/:pageNo([1-9]\\d*)?',

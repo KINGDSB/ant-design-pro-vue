@@ -3,11 +3,11 @@
     <a-form :form="form" style="max-width: 500px; margin: 40px auto 0;">
       <a-alert
         :closable="true"
-        message="确认转账后，资金将直接打入对方账户，无法退回。"
+        message="请认真核对申请信息"
         style="margin-bottom: 24px;"
       />
       <a-form-item
-        label="付款账户"
+        label="申请人"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
         class="stepFormText"
@@ -15,7 +15,7 @@
         ant-design@alipay.com
       </a-form-item>
       <a-form-item
-        label="收款账户"
+        label="申请接口"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
         class="stepFormText"
@@ -23,7 +23,7 @@
         test@example.com
       </a-form-item>
       <a-form-item
-        label="收款人姓名"
+        label="项目名称"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
         class="stepFormText"
@@ -31,7 +31,7 @@
         Alex
       </a-form-item>
       <a-form-item
-        label="转账金额"
+        label="金额"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
         class="stepFormText"

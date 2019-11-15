@@ -171,13 +171,14 @@ export default {
 
           // 这里用于判断接口是否有返回 r.totalCount 且 this.showPagination = true 且 pageNo 和 pageSize 存在 且 totalCount 小于等于 pageNo * pageSize 的大小
           // 当情况满足时，表示数据不满足分页大小，关闭 table 分页功能
-          try {
+         try {
             if ((['auto', true].includes(this.showPagination) && r.totalCount <= (r.pageNo * this.localPagination.pageSize))) {
               this.localPagination.hideOnSinglePage = true
             }
           } catch (e) {
             this.localPagination = false
           }
+         /* (!this.showPagination || !r.totalCount && this.showPagination === 'auto') && (this.localPagination = false) */
           console.log('loadData -> this.localPagination', this.localPagination)
           this.localDataSource = r.data // 返回结果中的数组数据
           this.localLoading = false
